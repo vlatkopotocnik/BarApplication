@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BarDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Artikl">
+    <Key>
+      <PropertyRef Name="ArtiklId" />
+    </Key>
+    <Property Name="ArtiklId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cjenik">
+    <Key>
+      <PropertyRef Name="CjenikId" />
+    </Key>
+    <Property Name="CjenikId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Datum od" Type="date" Nullable="false" />
+    <Property Name="Datum do" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CjenikArtikl">
+    <Key>
+      <PropertyRef Name="CjenikArtiklId" />
+    </Key>
+    <Property Name="CjenikArtiklId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArtiklId" Type="int" Nullable="false" />
+    <Property Name="CjenikID" Type="int" Nullable="false" />
+    <Property Name="Cjena" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Konobar">
+    <Key>
+      <PropertyRef Name="KonobarId" />
+    </Key>
+    <Property Name="KonobarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Racun">
+    <Key>
+      <PropertyRef Name="RacunId" />
+    </Key>
+    <Property Name="RacunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KonobarId" Type="int" Nullable="false" />
+    <Property Name="StolId" Type="int" Nullable="false" />
+    <Property Name="Vrijeme" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RacunArtiklCjenik">
+    <Key>
+      <PropertyRef Name="RacunArtiklCjenikId" />
+    </Key>
+    <Property Name="RacunArtiklCjenikId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RacunId" Type="int" Nullable="false" />
+    <Property Name="CjenikArtiklId" Type="int" Nullable="false" />
+    <Property Name="Kolicina" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stol">
+    <Key>
+      <PropertyRef Name="StolId" />
+    </Key>
+    <Property Name="StolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrojStola" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CjenikArtikl_Artikl">
+    <End Role="Artikl" Type="Self.Artikl" Multiplicity="1" />
+    <End Role="CjenikArtikl" Type="Self.CjenikArtikl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artikl">
+        <PropertyRef Name="ArtiklId" />
+      </Principal>
+      <Dependent Role="CjenikArtikl">
+        <PropertyRef Name="ArtiklId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CjenikArtikl_Cjenik">
+    <End Role="Cjenik" Type="Self.Cjenik" Multiplicity="1" />
+    <End Role="CjenikArtikl" Type="Self.CjenikArtikl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cjenik">
+        <PropertyRef Name="CjenikId" />
+      </Principal>
+      <Dependent Role="CjenikArtikl">
+        <PropertyRef Name="CjenikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Racun_Konobar">
+    <End Role="Konobar" Type="Self.Konobar" Multiplicity="1" />
+    <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Konobar">
+        <PropertyRef Name="KonobarId" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="KonobarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Racun_Stol">
+    <End Role="Stol" Type="Self.Stol" Multiplicity="1" />
+    <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stol">
+        <PropertyRef Name="StolId" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="StolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RacunArtiklCjenik_CjenikArtikl">
+    <End Role="CjenikArtikl" Type="Self.CjenikArtikl" Multiplicity="1" />
+    <End Role="RacunArtiklCjenik" Type="Self.RacunArtiklCjenik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CjenikArtikl">
+        <PropertyRef Name="CjenikArtiklId" />
+      </Principal>
+      <Dependent Role="RacunArtiklCjenik">
+        <PropertyRef Name="CjenikArtiklId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RacunArtiklCjenik_Racun">
+    <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+    <End Role="RacunArtiklCjenik" Type="Self.RacunArtiklCjenik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Racun">
+        <PropertyRef Name="RacunId" />
+      </Principal>
+      <Dependent Role="RacunArtiklCjenik">
+        <PropertyRef Name="RacunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BarDatabaseModelStoreContainer">
+    <EntitySet Name="Artikl" EntityType="Self.Artikl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cjenik" EntityType="Self.Cjenik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CjenikArtikl" EntityType="Self.CjenikArtikl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Konobar" EntityType="Self.Konobar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RacunArtiklCjenik" EntityType="Self.RacunArtiklCjenik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stol" EntityType="Self.Stol" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CjenikArtikl_Artikl" Association="Self.FK_CjenikArtikl_Artikl">
+      <End Role="Artikl" EntitySet="Artikl" />
+      <End Role="CjenikArtikl" EntitySet="CjenikArtikl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CjenikArtikl_Cjenik" Association="Self.FK_CjenikArtikl_Cjenik">
+      <End Role="Cjenik" EntitySet="Cjenik" />
+      <End Role="CjenikArtikl" EntitySet="CjenikArtikl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Racun_Konobar" Association="Self.FK_Racun_Konobar">
+      <End Role="Konobar" EntitySet="Konobar" />
+      <End Role="Racun" EntitySet="Racun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Racun_Stol" Association="Self.FK_Racun_Stol">
+      <End Role="Stol" EntitySet="Stol" />
+      <End Role="Racun" EntitySet="Racun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RacunArtiklCjenik_CjenikArtikl" Association="Self.FK_RacunArtiklCjenik_CjenikArtikl">
+      <End Role="CjenikArtikl" EntitySet="CjenikArtikl" />
+      <End Role="RacunArtiklCjenik" EntitySet="RacunArtiklCjenik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RacunArtiklCjenik_Racun" Association="Self.FK_RacunArtiklCjenik_Racun">
+      <End Role="Racun" EntitySet="Racun" />
+      <End Role="RacunArtiklCjenik" EntitySet="RacunArtiklCjenik" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

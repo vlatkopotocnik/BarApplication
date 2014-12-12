@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BarDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="Artikl">
+    <Key>
+      <PropertyRef Name="ArtiklId" />
+    </Key>
+    <Property Name="ArtiklId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CjenikArtikl" Relationship="Self.FK_CjenikArtikl_Artikl" FromRole="Artikl" ToRole="CjenikArtikl" />
+  </EntityType>
+  <EntityType Name="Cjenik">
+    <Key>
+      <PropertyRef Name="CjenikId" />
+    </Key>
+    <Property Name="CjenikId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Datum_od" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Datum_do" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CjenikArtikl" Relationship="Self.FK_CjenikArtikl_Cjenik" FromRole="Cjenik" ToRole="CjenikArtikl" />
+  </EntityType>
+  <EntityType Name="CjenikArtikl">
+    <Key>
+      <PropertyRef Name="CjenikArtiklId" />
+    </Key>
+    <Property Name="CjenikArtiklId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ArtiklId" Type="Int32" Nullable="false" />
+    <Property Name="CjenikID" Type="Int32" Nullable="false" />
+    <Property Name="Cjena" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Artikl" Relationship="Self.FK_CjenikArtikl_Artikl" FromRole="CjenikArtikl" ToRole="Artikl" />
+    <NavigationProperty Name="Cjenik" Relationship="Self.FK_CjenikArtikl_Cjenik" FromRole="CjenikArtikl" ToRole="Cjenik" />
+    <NavigationProperty Name="RacunArtiklCjenik" Relationship="Self.FK_RacunArtiklCjenik_CjenikArtikl" FromRole="CjenikArtikl" ToRole="RacunArtiklCjenik" />
+  </EntityType>
+  <EntityType Name="Konobar">
+    <Key>
+      <PropertyRef Name="KonobarId" />
+    </Key>
+    <Property Name="KonobarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Racun" Relationship="Self.FK_Racun_Konobar" FromRole="Konobar" ToRole="Racun" />
+  </EntityType>
+  <EntityType Name="Racun">
+    <Key>
+      <PropertyRef Name="RacunId" />
+    </Key>
+    <Property Name="RacunId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KonobarId" Type="Int32" Nullable="false" />
+    <Property Name="StolId" Type="Int32" Nullable="false" />
+    <Property Name="Vrijeme" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Konobar" Relationship="Self.FK_Racun_Konobar" FromRole="Racun" ToRole="Konobar" />
+    <NavigationProperty Name="Stol" Relationship="Self.FK_Racun_Stol" FromRole="Racun" ToRole="Stol" />
+    <NavigationProperty Name="RacunArtiklCjenik" Relationship="Self.FK_RacunArtiklCjenik_Racun" FromRole="Racun" ToRole="RacunArtiklCjenik" />
+  </EntityType>
+  <EntityType Name="RacunArtiklCjenik">
+    <Key>
+      <PropertyRef Name="RacunArtiklCjenikId" />
+    </Key>
+    <Property Name="RacunArtiklCjenikId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RacunId" Type="Int32" Nullable="false" />
+    <Property Name="CjenikArtiklId" Type="Int32" Nullable="false" />
+    <Property Name="Kolicina" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CjenikArtikl" Relationship="Self.FK_RacunArtiklCjenik_CjenikArtikl" FromRole="RacunArtiklCjenik" ToRole="CjenikArtikl" />
+    <NavigationProperty Name="Racun" Relationship="Self.FK_RacunArtiklCjenik_Racun" FromRole="RacunArtiklCjenik" ToRole="Racun" />
+  </EntityType>
+  <EntityType Name="Stol">
+    <Key>
+      <PropertyRef Name="StolId" />
+    </Key>
+    <Property Name="StolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrojStola" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Racun" Relationship="Self.FK_Racun_Stol" FromRole="Stol" ToRole="Racun" />
+  </EntityType>
+  <Association Name="FK_CjenikArtikl_Artikl">
+    <End Role="Artikl" Type="Self.Artikl" Multiplicity="1" />
+    <End Role="CjenikArtikl" Type="Self.CjenikArtikl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artikl">
+        <PropertyRef Name="ArtiklId" />
+      </Principal>
+      <Dependent Role="CjenikArtikl">
+        <PropertyRef Name="ArtiklId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CjenikArtikl_Cjenik">
+    <End Role="Cjenik" Type="Self.Cjenik" Multiplicity="1" />
+    <End Role="CjenikArtikl" Type="Self.CjenikArtikl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cjenik">
+        <PropertyRef Name="CjenikId" />
+      </Principal>
+      <Dependent Role="CjenikArtikl">
+        <PropertyRef Name="CjenikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RacunArtiklCjenik_CjenikArtikl">
+    <End Role="CjenikArtikl" Type="Self.CjenikArtikl" Multiplicity="1" />
+    <End Role="RacunArtiklCjenik" Type="Self.RacunArtiklCjenik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CjenikArtikl">
+        <PropertyRef Name="CjenikArtiklId" />
+      </Principal>
+      <Dependent Role="RacunArtiklCjenik">
+        <PropertyRef Name="CjenikArtiklId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Racun_Konobar">
+    <End Role="Konobar" Type="Self.Konobar" Multiplicity="1" />
+    <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Konobar">
+        <PropertyRef Name="KonobarId" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="KonobarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Racun_Stol">
+    <End Role="Stol" Type="Self.Stol" Multiplicity="1" />
+    <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stol">
+        <PropertyRef Name="StolId" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="StolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RacunArtiklCjenik_Racun">
+    <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+    <End Role="RacunArtiklCjenik" Type="Self.RacunArtiklCjenik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Racun">
+        <PropertyRef Name="RacunId" />
+      </Principal>
+      <Dependent Role="RacunArtiklCjenik">
+        <PropertyRef Name="RacunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BarDatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Artikl" EntityType="Self.Artikl" />
+    <EntitySet Name="Cjenik" EntityType="Self.Cjenik" />
+    <EntitySet Name="CjenikArtikl" EntityType="Self.CjenikArtikl" />
+    <EntitySet Name="Konobar" EntityType="Self.Konobar" />
+    <EntitySet Name="Racun" EntityType="Self.Racun" />
+    <EntitySet Name="RacunArtiklCjenik" EntityType="Self.RacunArtiklCjenik" />
+    <EntitySet Name="Stol" EntityType="Self.Stol" />
+    <AssociationSet Name="FK_CjenikArtikl_Artikl" Association="Self.FK_CjenikArtikl_Artikl">
+      <End Role="Artikl" EntitySet="Artikl" />
+      <End Role="CjenikArtikl" EntitySet="CjenikArtikl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CjenikArtikl_Cjenik" Association="Self.FK_CjenikArtikl_Cjenik">
+      <End Role="Cjenik" EntitySet="Cjenik" />
+      <End Role="CjenikArtikl" EntitySet="CjenikArtikl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RacunArtiklCjenik_CjenikArtikl" Association="Self.FK_RacunArtiklCjenik_CjenikArtikl">
+      <End Role="CjenikArtikl" EntitySet="CjenikArtikl" />
+      <End Role="RacunArtiklCjenik" EntitySet="RacunArtiklCjenik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Racun_Konobar" Association="Self.FK_Racun_Konobar">
+      <End Role="Konobar" EntitySet="Konobar" />
+      <End Role="Racun" EntitySet="Racun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Racun_Stol" Association="Self.FK_Racun_Stol">
+      <End Role="Stol" EntitySet="Stol" />
+      <End Role="Racun" EntitySet="Racun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RacunArtiklCjenik_Racun" Association="Self.FK_RacunArtiklCjenik_Racun">
+      <End Role="Racun" EntitySet="Racun" />
+      <End Role="RacunArtiklCjenik" EntitySet="RacunArtiklCjenik" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

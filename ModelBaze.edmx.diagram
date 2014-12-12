@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c12c45bfba8b4542ba7a6bbe1680a362" Name="Diagram1">
+        <EntityTypeShape EntityType="BarDatabaseModel.Artikl" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarDatabaseModel.Cjenik" Width="1.5" PointX="2.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarDatabaseModel.CjenikArtikl" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarDatabaseModel.Konobar" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarDatabaseModel.Racun" Width="1.5" PointX="2.875" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarDatabaseModel.RacunArtiklCjenik" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarDatabaseModel.Stol" Width="1.5" PointX="0.5" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="BarDatabaseModel.FK_CjenikArtikl_Artikl" ManuallyRouted="false" />
+        <AssociationConnector Association="BarDatabaseModel.FK_CjenikArtikl_Cjenik" ManuallyRouted="false" />
+        <AssociationConnector Association="BarDatabaseModel.FK_RacunArtiklCjenik_CjenikArtikl" ManuallyRouted="false" />
+        <AssociationConnector Association="BarDatabaseModel.FK_Racun_Konobar" ManuallyRouted="false" />
+        <AssociationConnector Association="BarDatabaseModel.FK_Racun_Stol" ManuallyRouted="false" />
+        <AssociationConnector Association="BarDatabaseModel.FK_RacunArtiklCjenik_Racun" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

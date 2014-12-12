@@ -1,0 +1,2 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeEditing/Localization/MoveToResource/LastResourceFile/@EntryValue">58EE8C59-6C64-4811-9567-5AE274515CA2/d:App_LocalResources/f:Default.aspx.resx</s:String></wpf:ResourceDictionary>

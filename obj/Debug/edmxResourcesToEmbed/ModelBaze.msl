@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BarDatabaseModelStoreContainer" CdmEntityContainer="BarDatabaseEntities">
+    <EntitySetMapping Name="Artikl">
+      <EntityTypeMapping TypeName="BarDatabaseModel.Artikl">
+        <MappingFragment StoreEntitySet="Artikl">
+          <ScalarProperty Name="ArtiklId" ColumnName="ArtiklId" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cjenik">
+      <EntityTypeMapping TypeName="BarDatabaseModel.Cjenik">
+        <MappingFragment StoreEntitySet="Cjenik">
+          <ScalarProperty Name="CjenikId" ColumnName="CjenikId" />
+          <ScalarProperty Name="Datum_od" ColumnName="Datum od" />
+          <ScalarProperty Name="Datum_do" ColumnName="Datum do" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CjenikArtikl">
+      <EntityTypeMapping TypeName="BarDatabaseModel.CjenikArtikl">
+        <MappingFragment StoreEntitySet="CjenikArtikl">
+          <ScalarProperty Name="CjenikArtiklId" ColumnName="CjenikArtiklId" />
+          <ScalarProperty Name="ArtiklId" ColumnName="ArtiklId" />
+          <ScalarProperty Name="CjenikID" ColumnName="CjenikID" />
+          <ScalarProperty Name="Cjena" ColumnName="Cjena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Konobar">
+      <EntityTypeMapping TypeName="BarDatabaseModel.Konobar">
+        <MappingFragment StoreEntitySet="Konobar">
+          <ScalarProperty Name="KonobarId" ColumnName="KonobarId" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Racun">
+      <EntityTypeMapping TypeName="BarDatabaseModel.Racun">
+        <MappingFragment StoreEntitySet="Racun">
+          <ScalarProperty Name="RacunId" ColumnName="RacunId" />
+          <ScalarProperty Name="KonobarId" ColumnName="KonobarId" />
+          <ScalarProperty Name="StolId" ColumnName="StolId" />
+          <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RacunArtiklCjenik">
+      <EntityTypeMapping TypeName="BarDatabaseModel.RacunArtiklCjenik">
+        <MappingFragment StoreEntitySet="RacunArtiklCjenik">
+          <ScalarProperty Name="RacunArtiklCjenikId" ColumnName="RacunArtiklCjenikId" />
+          <ScalarProperty Name="RacunId" ColumnName="RacunId" />
+          <ScalarProperty Name="CjenikArtiklId" ColumnName="CjenikArtiklId" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stol">
+      <EntityTypeMapping TypeName="BarDatabaseModel.Stol">
+        <MappingFragment StoreEntitySet="Stol">
+          <ScalarProperty Name="StolId" ColumnName="StolId" />
+          <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
